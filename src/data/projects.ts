@@ -1,27 +1,47 @@
 import { Project } from "@/types";
 
-export const projects: Project[] = [
+export const companyProjects: Project[] = [
   {
-    title: "Salla Theme Engine",
+    title: "Salla Merchant Dashboard v4",
     description:
-      "Built the next-generation theme engine for Salla's e-commerce platform, powering thousands of online stores with customizable, performant storefronts.",
-    tags: ["Vue.js", "TypeScript", "Tailwind CSS", "E-commerce"],
+      "Large scale ecommerce management platform built using micro frontend architecture to support modular team ownership and independent deployments. Powers thousands of online stores across the MENA region.",
+    tags: ["React", "TypeScript", "Micro Frontends", "Design System"],
     liveUrl: "https://salla.com",
     featured: true,
   },
   {
-    title: "Design System",
+    title: "Sehhaty",
     description:
-      "Led the development of a comprehensive design system used across multiple products, ensuring consistency and accelerating development velocity.",
-    tags: ["React", "TypeScript", "Storybook", "Figma"],
+      "National digital health platform by the Ministry of Health, serving nationwide users with accessible healthcare services.",
+    tags: ["React", "TypeScript", "Accessibility", "Healthcare"],
+    liveUrl: "https://www.moh.gov.sa/en/eServices/Sehhaty/Pages/default.aspx",
     featured: true,
   },
   {
-    title: "Content Platform",
+    title: "Seha",
     description:
-      "A headless CMS-powered content platform with MDX support, real-time collaboration, and multi-language support including RTL languages.",
-    tags: ["Next.js", "TypeScript", "MDX", "i18n"],
-    sourceUrl: "https://github.com/mohanad7afiz",
+      "National health platform focused on usability, accessibility (WCAG), and cross platform performance. Built scalable component architecture and state management patterns.",
+    tags: ["React", "TypeScript", "Accessibility", "Healthcare"],
+    liveUrl: "https://www.seha.sa/en",
     featured: false,
+  },
+  {
+    title: "ANAT",
+    description:
+      "Digital communication and service platform for healthcare professionals, supporting multi device experiences and performance optimized UI.",
+    tags: ["TypeScript", "Vue.js", "Healthcare", "Performance"],
+    liveUrl: "https://anat.sa/",
+    featured: false,
+  },
+];
+
+export const personalProjects: Project[] = [
+  {
+    title: "RepostEngine",
+    description:
+      "SaaS tool that turns a single YouTube video into optimized posts for 10+ platforms in 30 seconds. Handles transcript extraction, platform specific formatting, and direct sharing.",
+    tags: ["Next.js", "React", "Tailwind CSS", "SaaS"],
+    liveUrl: "https://repostengine.com",
+    featured: true,
   },
 ];

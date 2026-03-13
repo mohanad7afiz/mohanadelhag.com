@@ -44,7 +44,7 @@ export function Newsletter() {
             </form>
             {submitted && (
               <p className="mt-4 text-sm text-accent">
-                Coming soon — stay tuned!
+                Coming soon, stay tuned!
               </p>
             )}
           </div>

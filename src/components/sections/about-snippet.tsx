@@ -12,16 +12,15 @@ export function AboutSnippet() {
           </h2>
           <div className="space-y-4 text-lg leading-relaxed text-muted">
             <p>
-              I&apos;m a senior frontend engineer with 9+ years of experience
-              building web applications that serve millions of users. Currently
-              at Salla, where I work on the platform that powers thousands of
-              e-commerce stores.
+              Engineering Leader with 9+ years of experience building scalable
+              web platforms across ecommerce, healthcare, and government sectors.
+              I combine deep frontend architecture expertise with strong
+              leadership in engineering delivery and team development.
             </p>
             <p>
-              I care deeply about developer experience, performance, and
-              building products that make a real difference. When I&apos;m not
-              coding, I&apos;m writing about what I learn and sharing it with
-              the community.
+              Currently at Salla, where I lead the frontend architecture for the
+              merchant dashboard powering thousands of online stores across the
+              MENA region.
             </p>
           </div>
           <Link

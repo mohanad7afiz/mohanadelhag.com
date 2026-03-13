@@ -16,18 +16,18 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://mohanadelhag.com"),
+  metadataBase: new URL("https://mohanadelhag.me"),
   title: {
     default: "Mohanad Elhag",
     template: "%s | Mohanad Elhag",
   },
   description:
-    "Senior Frontend Engineer — building products, sharing knowledge.",
+    "Engineering Lead & Frontend Architect. Building scalable web platforms across ecommerce, healthcare, and government sectors.",
   openGraph: {
     title: "Mohanad Elhag",
     description:
-      "Senior Frontend Engineer — building products, sharing knowledge.",
-    url: "https://mohanadelhag.com",
+      "Engineering Lead & Frontend Architect. Building scalable web platforms across ecommerce, healthcare, and government sectors.",
+    url: "https://mohanadelhag.me",
     siteName: "Mohanad Elhag",
     locale: "en_US",
     type: "website",
@@ -37,12 +37,12 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Mohanad Elhag",
     description:
-      "Senior Frontend Engineer — building products, sharing knowledge.",
+      "Engineering Lead & Frontend Architect. Building scalable web platforms across ecommerce, healthcare, and government sectors.",
     images: ["/og-default.png"],
   },
 };
 
-// Inline script to prevent FOUC — reads theme from localStorage before paint.
+// Inline script to prevent FOUC. Reads theme from localStorage before paint.
 // Content is fully static (no user input), so dangerouslySetInnerHTML is safe here.
 const themeInitScript = `(function(){var t=localStorage.getItem('theme')||'dark';document.documentElement.classList.add(t)})()`;
 

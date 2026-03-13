@@ -15,10 +15,10 @@ Every technical decision should trace back to a user need. Before reaching for t
 
 ## Server-First Rendering
 
-The pendulum has swung back to the server, and for good reason. Server components in React 19 give us the best of both worlds — fast initial loads with rich interactivity where it matters.
+The pendulum has swung back to the server, and for good reason. Server components in React 19 give us the best of both worlds: fast initial loads with rich interactivity where it matters.
 
 ```tsx
-// Server component — zero JS sent to the client
+// Server component, zero JS sent to the client
 async function PostList() {
   const posts = await getPosts();
   return (
@@ -39,9 +39,9 @@ TypeScript isn't just for catching typos. A well-typed codebase serves as living
 
 ### Practical Tips
 
-- **Define types at the boundary** — where data enters your system
-- **Use `satisfies`** for type-safe object literals
-- **Avoid `any`** — if you need escape hatches, use `unknown` and narrow
+- **Define types at the boundary**, where data enters your system
+- **Use `satisfies`** for type safe object literals
+- **Avoid `any`**: if you need escape hatches, use `unknown` and narrow
 
 ## Content as Code
 

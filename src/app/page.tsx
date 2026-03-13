@@ -4,17 +4,20 @@ import { FeaturedProjects } from "@/components/sections/featured-projects";
 import { AboutSnippet } from "@/components/sections/about-snippet";
 import { Newsletter } from "@/components/sections/newsletter";
 import { getAllPosts } from "@/lib/mdx";
-import { projects } from "@/data/projects";
+import { companyProjects, personalProjects } from "@/data/projects";
 
 export default function Home() {
   const posts = getAllPosts().slice(0, 3);
-  const featuredProjects = projects.filter((p) => p.featured);
+  const featured = [
+    ...companyProjects.filter((p) => p.featured),
+    ...personalProjects.filter((p) => p.featured),
+  ];
 
   return (
     <>
       <Hero />
       <LatestPosts posts={posts} />
-      <FeaturedProjects projects={featuredProjects} />
+      <FeaturedProjects projects={featured} />
       <AboutSnippet />
       <Newsletter />
     </>
