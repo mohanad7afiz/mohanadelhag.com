@@ -1,0 +1,18 @@
+---
+title: "Quick Take: React 19 in Production"
+date: 2026-03-12
+tags: [react, opinion]
+type: note
+description: "First impressions after running React 19 in production for a few months."
+published: true
+---
+
+After running React 19 in production for a few months, here are my honest thoughts:
+
+**Server components are the real deal.** The performance wins are significant. We cut our JS bundle by ~40% on key pages. The mental model takes getting used to, but once it clicks, you wonder how you lived without it.
+
+**The `use` hook simplifies data fetching patterns** considerably. No more `useEffect` + `useState` dance for async data. But be careful with error boundaries, you need them.
+
+**Actions are underrated.** Form handling with `useActionState` is clean and progressive-enhancement-friendly. It's the right abstraction for most form scenarios.
+
+The ecosystem is still catching up, but the direction is right. React is becoming a better framework while staying a great library.

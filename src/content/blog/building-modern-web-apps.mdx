@@ -1,0 +1,56 @@
+---
+title: "Building Modern Web Applications in 2026"
+date: 2026-03-10
+tags: [react, nextjs, architecture]
+type: article
+description: "A practical guide to building performant, maintainable web applications with the latest tools and patterns."
+published: true
+---
+
+The landscape of web development keeps evolving, but the fundamentals remain. Here's what I've learned building applications at scale over the past 9+ years.
+
+## Start with the User
+
+Every technical decision should trace back to a user need. Before reaching for the latest framework or library, ask: what problem am I solving? The best architecture is the one that serves your users well and your team can maintain.
+
+## Server-First Rendering
+
+The pendulum has swung back to the server, and for good reason. Server components in React 19 give us the best of both worlds: fast initial loads with rich interactivity where it matters.
+
+```tsx
+// Server component, zero JS sent to the client
+async function PostList() {
+  const posts = await getPosts();
+  return (
+    <ul>
+      {posts.map(post => (
+        <li key={post.slug}>{post.title}</li>
+      ))}
+    </ul>
+  );
+}
+```
+
+The key insight: most of your UI doesn't need to be interactive. Render it on the server and save your users the bandwidth.
+
+## Type Safety as a Feature
+
+TypeScript isn't just for catching typos. A well-typed codebase serves as living documentation and enables fearless refactoring. When your types are right, your editor becomes a pair programmer.
+
+### Practical Tips
+
+- **Define types at the boundary**, where data enters your system
+- **Use `satisfies`** for type safe object literals
+- **Avoid `any`**: if you need escape hatches, use `unknown` and narrow
+
+## Content as Code
+
+For content-heavy sites, MDX is a superpower. You get the authoring experience of Markdown with the flexibility of React components. Pair it with static generation and you have a blazing-fast content platform with zero runtime cost.
+
+## Ship, Measure, Iterate
+
+The best code is code that's deployed. Don't let perfect be the enemy of shipped. Build the simplest thing that works, put it in front of users, and iterate based on real feedback.
+
+---
+
+*These are patterns I've refined building e-commerce platforms serving millions of users. The tools change, but the principles endure.*
