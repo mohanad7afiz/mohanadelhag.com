@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect } from "react";
+import { useEffect, useRef, useCallback } from "react";
 import { cn } from "@/lib/utils";
 
 interface MobileMenuProps {
@@ -13,9 +13,13 @@ interface MobileMenuProps {
 }
 
 export function MobileMenu({ open, onClose, links, pathname }: MobileMenuProps) {
+  const panelRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+
   useEffect(() => {
     if (open) {
       document.body.style.overflow = "hidden";
+      closeButtonRef.current?.focus();
     } else {
       document.body.style.overflow = "";
     }
@@ -23,6 +27,31 @@ export function MobileMenu({ open, onClose, links, pathname }: MobileMenuProps) 
       document.body.style.overflow = "";
     };
   }, [open]);
+
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+        return;
+      }
+      if (e.key !== "Tab" || !panelRef.current) return;
+
+      const focusable = panelRef.current.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      );
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    },
+    [onClose]
+  );
 
   return (
     <AnimatePresence>
@@ -36,10 +65,16 @@ export function MobileMenu({ open, onClose, links, pathname }: MobileMenuProps) 
             transition={{ duration: 0.2 }}
             className="fixed inset-0 z-50 bg-black/50 md:hidden"
             onClick={onClose}
+            aria-hidden="true"
           />
 
           {/* Panel */}
           <motion.div
+            ref={panelRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Navigation menu"
+            onKeyDown={handleKeyDown}
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
@@ -47,7 +82,9 @@ export function MobileMenu({ open, onClose, links, pathname }: MobileMenuProps) 
             className="fixed inset-y-0 right-0 z-50 w-64 border-l border-border bg-background p-6 md:hidden"
           >
             <button
+              ref={closeButtonRef}
               onClick={onClose}
+              type="button"
               className="mb-8 rounded-md p-2 text-muted transition-colors hover:text-foreground cursor-pointer"
               aria-label="Close menu"
             >

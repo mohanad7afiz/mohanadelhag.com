@@ -56,7 +56,7 @@ export function Footer() {
           &copy; {new Date().getFullYear()} Mohanad Elhag. All rights reserved.
         </p>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4" aria-label="Social media links" role="group">
           {socialLinks.map((link) => (
             <Link
               key={link.label}

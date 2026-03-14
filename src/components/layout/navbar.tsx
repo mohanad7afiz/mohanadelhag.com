@@ -59,7 +59,7 @@ export function Navbar() {
           <button
             onClick={toggleTheme}
             className="rounded-md p-2 text-muted transition-colors hover:text-foreground cursor-pointer"
-            aria-label="Toggle theme"
+            aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
           >
             {theme === "dark" ? (
               <svg

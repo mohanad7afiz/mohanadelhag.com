@@ -1,13 +1,7 @@
 "use client";
 
 import { useState } from "react";
-
-function slugify(text: string): string {
-  return text
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)/g, "");
-}
+import { slugify } from "@/lib/utils";
 
 function Heading({
   level,
@@ -37,6 +31,7 @@ function CopyButton({ code }: { code: string }) {
 
   return (
     <button
+      type="button"
       onClick={handleCopy}
       className="absolute right-3 top-3 rounded-md border border-border bg-background/50 px-2 py-1 text-xs text-muted opacity-0 transition-opacity hover:text-foreground group-hover:opacity-100 cursor-pointer"
       aria-label="Copy code"

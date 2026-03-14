@@ -44,6 +44,7 @@ export function TableOfContents({ headings }: TableOfContentsProps) {
           <li key={heading.id}>
             <a
               href={`#${heading.id}`}
+              aria-current={activeId === heading.id ? "true" : undefined}
               className={cn(
                 "block text-sm transition-colors hover:text-foreground",
                 heading.level === 3 && "pl-3",

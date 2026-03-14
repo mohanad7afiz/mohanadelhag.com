@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
 
 export function Hero() {
   return (
@@ -21,7 +20,7 @@ export function Hero() {
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-muted sm:text-xl">
             Building scalable web platforms across ecommerce, healthcare, and
-            government sectors. 9+ years leading engineering teams and
+            government sectors. Over 9 years leading engineering teams and
             delivering products used by millions.
           </p>
         </motion.div>
@@ -32,13 +31,17 @@ export function Hero() {
           transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
           className="mt-10 flex flex-wrap gap-4"
         >
-          <Link href="/blog">
-            <Button size="lg">Read the Blog</Button>
+          <Link
+            href="/blog"
+            className="inline-flex items-center justify-center rounded-lg bg-accent px-6 py-3 text-base font-medium text-white dark:text-background shadow-sm transition-colors hover:bg-accent/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+          >
+            Read the Blog
           </Link>
-          <Link href="/about">
-            <Button variant="secondary" size="lg">
-              About Me
-            </Button>
+          <Link
+            href="/about"
+            className="inline-flex items-center justify-center rounded-lg border border-border px-6 py-3 text-base font-medium text-foreground transition-colors hover:bg-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+          >
+            About Me
           </Link>
         </motion.div>
       </div>
