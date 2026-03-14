@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { Badge } from "@/components/ui/badge";
 import { AnimateIn } from "@/components/ui/animate-in";
@@ -7,7 +6,7 @@ import { AnimateIn } from "@/components/ui/animate-in";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Learn about Mohanad Elhag, an Engineering Lead with 9+ years building scalable web platforms using React, TypeScript, and modern web technologies.",
+    "Learn about Mohanad Elhag, an Engineering Lead with over 9 years building scalable web platforms using React, TypeScript, and modern web technologies.",
 };
 
 const techStack = [
@@ -124,7 +123,7 @@ export default function AboutPage() {
           <div className="space-y-4 text-lg leading-relaxed text-muted">
             <p>
               I&apos;m Mohanad, a technologist based in Riyadh, Saudi Arabia.
-              With 9+ years of experience building scalable web platforms
+              With over 9 years of experience building scalable web platforms
               across ecommerce, healthcare, and government sectors using React,
               TypeScript, Vue.js, Next.js, and Node.js, I combine deep
               architecture expertise with strong leadership in engineering
@@ -141,13 +140,13 @@ export default function AboutPage() {
           </div>
         </AnimateIn>
 
-        {/* Leadership */}
+        {/* What I Bring — editorial list, not card grid */}
         <AnimateIn>
-          <section className="mt-16">
-            <h2 className="mb-6 text-2xl font-bold tracking-tight">
+          <section className="mt-20">
+            <h2 className="mb-8 text-2xl font-bold tracking-tight">
               What I Bring
             </h2>
-            <div className="grid gap-6 sm:grid-cols-2">
+            <dl className="space-y-6">
               {[
                 {
                   title: "Architecture Leadership",
@@ -172,37 +171,36 @@ export default function AboutPage() {
               ].map((item) => (
                 <div
                   key={item.title}
-                  className="rounded-lg border border-border p-5"
+                  className="border-l-2 border-accent pl-4"
                 >
-                  <h3 className="mb-2 font-semibold">{item.title}</h3>
-                  <p className="text-sm text-muted">{item.description}</p>
+                  <dt className="font-semibold">{item.title}</dt>
+                  <dd className="mt-1 text-sm text-muted">
+                    {item.description}
+                  </dd>
                 </div>
               ))}
-            </div>
+            </dl>
           </section>
         </AnimateIn>
 
-        {/* Enterprise Projects */}
+        {/* Enterprise Projects — flat list with separators */}
         <AnimateIn>
-          <section className="mt-16">
-            <h2 className="mb-6 text-2xl font-bold tracking-tight">
+          <section className="mt-24">
+            <h2 className="mb-8 text-2xl font-bold tracking-tight">
               Enterprise Projects
             </h2>
-            <div className="space-y-4">
+            <div className="divide-y divide-border">
               {enterpriseProjects.map((project) => (
-                <div
-                  key={project.title}
-                  className="rounded-lg border border-border p-5"
-                >
+                <div key={project.title} className="py-4 first:pt-0 last:pb-0">
                   <h3 className="font-semibold">
-                    <Link
+                    <a
                       href={project.url}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="hover:text-accent transition-colors"
                     >
-                      {project.title}
-                    </Link>
+                      {project.title} &rarr;
+                    </a>
                   </h3>
                   <p className="mt-1 text-sm text-muted">
                     {project.description}
@@ -215,7 +213,7 @@ export default function AboutPage() {
 
         {/* Tech Stack */}
         <AnimateIn>
-          <section className="mt-16">
+          <section className="mt-14">
             <h2 className="mb-6 text-2xl font-bold tracking-tight">
               Tech Stack
             </h2>
@@ -238,7 +236,7 @@ export default function AboutPage() {
 
         {/* Experience */}
         <AnimateIn>
-          <section className="mt-16">
+          <section className="mt-24">
             <h2 className="mb-8 text-2xl font-bold tracking-tight">
               Experience
             </h2>
@@ -254,14 +252,14 @@ export default function AboutPage() {
                     <span className="text-accent">
                       @{" "}
                       {job.companyUrl ? (
-                        <Link
+                        <a
                           href={job.companyUrl}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="hover:underline"
                         >
                           {job.company}
-                        </Link>
+                        </a>
                       ) : (
                         job.company
                       )}
@@ -274,67 +272,65 @@ export default function AboutPage() {
           </section>
         </AnimateIn>
 
-        {/* Education */}
+        {/* Education — flat, no card */}
         <AnimateIn>
-          <section className="mt-16">
-            <h2 className="mb-6 text-2xl font-bold tracking-tight">
+          <section className="mt-14">
+            <h2 className="mb-4 text-2xl font-bold tracking-tight">
               Education
             </h2>
-            <div className="rounded-lg border border-border p-5">
-              <p className="mb-1 text-sm text-muted">2015</p>
-              <h3 className="font-semibold">
-                <Link
-                  href="http://utp.edu.my/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-accent transition-colors"
-                >
-                  University of Petronas
-                </Link>{" "}
-                <span className="text-accent">(UTP), Malaysia</span>
-              </h3>
-              <p className="mt-1 text-sm text-muted">
-                B.Sc. in Information and Communication Technology, majoring in
-                Software Engineering
-              </p>
-            </div>
+            <p className="text-sm text-muted">2015</p>
+            <h3 className="mt-1 font-semibold">
+              <a
+                href="http://utp.edu.my/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-accent transition-colors"
+              >
+                University of Petronas
+              </a>{" "}
+              <span className="text-accent">(UTP), Malaysia</span>
+            </h3>
+            <p className="mt-1 text-sm text-muted">
+              B.Sc. in Information and Communication Technology, majoring in
+              Software Engineering
+            </p>
           </section>
         </AnimateIn>
 
-        {/* Social */}
+        {/* Connect */}
         <AnimateIn>
-          <section className="mt-16">
+          <section className="mt-20">
             <h2 className="mb-4 text-2xl font-bold tracking-tight">
               Connect
             </h2>
             <p className="text-muted">
               Find me on{" "}
-              <Link
+              <a
                 href="https://github.com/mohanad7afiz"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-accent hover:underline"
               >
                 GitHub
-              </Link>
+              </a>
               ,{" "}
-              <Link
+              <a
                 href="https://linkedin.com/in/mohanad7afiz"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-accent hover:underline"
               >
                 LinkedIn
-              </Link>
+              </a>
               , or{" "}
-              <Link
+              <a
                 href="https://x.com/mohanad7afiz"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-accent hover:underline"
               >
                 X
-              </Link>
+              </a>
               .
             </p>
           </section>

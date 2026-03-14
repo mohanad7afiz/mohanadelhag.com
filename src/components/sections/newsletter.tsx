@@ -18,15 +18,15 @@ export function Newsletter() {
   };
 
   return (
-    <section className="border-t border-border py-20">
+    <section className="border-t border-border py-16">
       <Container size="narrow">
         <AnimateIn>
           <div className="text-center">
             <h2 className="mb-3 text-2xl font-bold tracking-tight sm:text-3xl">
-              Stay in the loop
+              Newsletter coming soon
             </h2>
             <p className="mb-8 text-muted">
-              Get notified when I publish new articles and notes. No spam, ever.
+              I am working on a newsletter. Leave your email and I will notify you when it launches.
             </p>
             <form
               onSubmit={handleSubmit}
@@ -37,14 +37,15 @@ export function Newsletter() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@example.com"
+                aria-label="Email address"
                 required
                 className="flex-1 rounded-lg border border-border bg-card px-4 py-2.5 text-sm text-foreground placeholder:text-muted focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
               />
-              <Button type="submit">Subscribe</Button>
+              <Button type="submit">Notify me</Button>
             </form>
             {submitted && (
-              <p className="mt-4 text-sm text-accent">
-                Coming soon, stay tuned!
+              <p className="mt-4 text-sm text-accent" role="status">
+                Thanks! You will be the first to know.
               </p>
             )}
           </div>

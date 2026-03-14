@@ -19,7 +19,7 @@ export default function BlogPage() {
       <Container>
         <SectionHeading
           title="Blog"
-          subtitle="Long-form articles and quick notes on frontend engineering."
+          subtitle="Articles and notes on frontend engineering, architecture, and building products."
         />
         <BlogListClient posts={posts} allTags={allTags} />
       </Container>

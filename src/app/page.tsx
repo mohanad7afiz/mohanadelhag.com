@@ -2,7 +2,7 @@ import { Hero } from "@/components/sections/hero";
 import { LatestPosts } from "@/components/sections/latest-posts";
 import { FeaturedProjects } from "@/components/sections/featured-projects";
 import { AboutSnippet } from "@/components/sections/about-snippet";
-import { Newsletter } from "@/components/sections/newsletter";
+
 import { getAllPosts } from "@/lib/mdx";
 import { companyProjects, personalProjects } from "@/data/projects";
 
@@ -19,7 +19,7 @@ export default function Home() {
       <LatestPosts posts={posts} />
       <FeaturedProjects projects={featured} />
       <AboutSnippet />
-      <Newsletter />
+
     </>
   );
 }

@@ -4,7 +4,7 @@ import { AnimateIn } from "@/components/ui/animate-in";
 
 export function AboutSnippet() {
   return (
-    <section className="py-20">
+    <section className="py-24">
       <Container size="narrow">
         <AnimateIn>
           <h2 className="mb-6 text-3xl font-bold tracking-tight sm:text-4xl">
@@ -12,7 +12,7 @@ export function AboutSnippet() {
           </h2>
           <div className="space-y-4 text-lg leading-relaxed text-muted">
             <p>
-              Engineering Leader with 9+ years of experience building scalable
+              Engineering Leader with over 9 years of experience building scalable
               web platforms across ecommerce, healthcare, and government sectors.
               I combine deep frontend architecture expertise with strong
               leadership in engineering delivery and team development.

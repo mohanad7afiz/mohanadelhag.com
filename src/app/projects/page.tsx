@@ -60,7 +60,7 @@ export default function ProjectsPage() {
       <Container>
         <SectionHeading
           title="Projects"
-          subtitle="Things I've built and contributed to."
+          subtitle="Products and tools I have built across my career."
         />
 
         {/* Company Projects */}
