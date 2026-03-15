@@ -5,8 +5,6 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import rehypePrismPlus from "rehype-prism-plus";
 import { getAllPosts, getPostBySlug, getPostSlugs } from "@/lib/mdx";
 import { mdxComponents } from "@/components/mdx-components";
-import { Container } from "@/components/ui/container";
-import { Badge } from "@/components/ui/badge";
 import { formatDate, extractHeadings } from "@/lib/utils";
 import { TableOfContents } from "./table-of-contents";
 
@@ -58,40 +56,36 @@ export default async function BlogPostPage({
   const headings = post.type === "article" ? extractHeadings(post.content) : [];
 
   return (
-    <div className="py-20">
-      <Container size="narrow">
+    <div>
+      <div className="container-narrow">
         {/* Header */}
-        <header className="mb-10">
-          <div className="mb-4 flex items-center gap-3 text-sm text-muted">
-            <Badge className="border-accent/30 text-accent">
-              {post.type === "article" ? "Article" : "Note"}
-            </Badge>
-            <time dateTime={post.date}>{formatDate(post.date)}</time>
-            <span>&middot;</span>
+        <header className="article-header">
+          <div className="article-header__type" data-reveal>
+            {post.type === "article" ? "Article" : "Note"}
+          </div>
+          <h1 className="article-header__title" data-reveal>{post.title}</h1>
+          <div className="article-header__meta" data-reveal>
+            <span>{formatDate(post.date)}</span>
             <span>{post.readingTime}</span>
           </div>
-          <h1 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
-            {post.title}
-          </h1>
-          {post.description && (
-            <p className="mt-4 text-lg text-muted">{post.description}</p>
+          {post.tags.length > 0 && (
+            <div className="article-header__tags" data-reveal>
+              {post.tags.map((tag) => (
+                <span key={tag} className="tag">{tag}</span>
+              ))}
+            </div>
           )}
-          <div className="mt-4 flex flex-wrap gap-1.5">
-            {post.tags.map((tag) => (
-              <Badge key={tag}>{tag}</Badge>
-            ))}
-          </div>
         </header>
 
         {/* Content with optional TOC */}
         <div className="relative">
           {post.type === "article" && headings.length > 0 && (
-            <aside className="mb-10 rounded-lg border border-border p-5 lg:absolute lg:-right-64 lg:mb-0 lg:w-56 lg:border-0 lg:p-0">
+            <aside className="mb-10 rounded-lg border border-[var(--border)] p-5 lg:absolute lg:-right-64 lg:mb-0 lg:w-56 lg:border-0 lg:p-0">
               <TableOfContents headings={headings} />
             </aside>
           )}
 
-          <article className="prose max-w-none">
+          <article className="prose max-w-none" data-reveal>
             <MDXRemote
               source={post.content}
               components={mdxComponents}
@@ -105,33 +99,27 @@ export default async function BlogPostPage({
         </div>
 
         {/* Prev/Next navigation */}
-        <nav className="mt-16 grid gap-4 border-t border-border pt-8 sm:grid-cols-2">
-          {prevPost ? (
-            <Link
-              href={`/blog/${prevPost.slug}`}
-              className="group rounded-lg border border-border p-4 transition-colors hover:border-accent/30"
-            >
-              <p className="text-sm text-muted">&larr; Previous</p>
-              <p className="mt-1 font-medium group-hover:text-accent">
-                {prevPost.title}
-              </p>
-            </Link>
-          ) : (
-            <div />
-          )}
-          {nextPost && (
-            <Link
-              href={`/blog/${nextPost.slug}`}
-              className="group rounded-lg border border-border p-4 text-right transition-colors hover:border-accent/30"
-            >
-              <p className="text-sm text-muted">Next &rarr;</p>
-              <p className="mt-1 font-medium group-hover:text-accent">
-                {nextPost.title}
-              </p>
-            </Link>
-          )}
-        </nav>
-      </Container>
+        {(prevPost || nextPost) && (
+          <nav className="post-nav">
+            {prevPost ? (
+              <Link href={`/blog/${prevPost.slug}`} className="post-nav__item">
+                <p className="post-nav__direction">Previous</p>
+                <p className="post-nav__title">{prevPost.title}</p>
+              </Link>
+            ) : (
+              <div />
+            )}
+            {nextPost ? (
+              <Link href={`/blog/${nextPost.slug}`} className="post-nav__item" style={{ textAlign: "right" }}>
+                <p className="post-nav__direction">Next</p>
+                <p className="post-nav__title">{nextPost.title}</p>
+              </Link>
+            ) : (
+              <div />
+            )}
+          </nav>
+        )}
+      </div>
     </div>
   );
 }

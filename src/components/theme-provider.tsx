@@ -29,9 +29,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>(getInitialTheme);
 
   useEffect(() => {
-    const root = document.documentElement;
-    root.classList.remove("dark", "light");
-    root.classList.add(theme);
+    document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
   }, [theme]);
 

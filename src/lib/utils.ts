@@ -10,6 +10,16 @@ export function formatDate(date: string): string {
   });
 }
 
+export function slugify(text: string): string {
+  return text
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9\u0600-\u06ff]+/g, "-")
+    .replace(/(^-|-$)/g, "")
+    || "heading";
+}
+
 export function extractHeadings(
   content: string
 ): { level: number; text: string; id: string }[] {
@@ -19,10 +29,7 @@ export function extractHeadings(
   while ((match = headingRegex.exec(content)) !== null) {
     const level = match[0].startsWith("###") ? 3 : 2;
     const text = match[1].trim();
-    const id = text
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/(^-|-$)/g, "");
+    const id = slugify(text);
     headings.push({ level, text, id });
   }
   return headings;

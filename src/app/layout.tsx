@@ -1,18 +1,21 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Outfit, JetBrains_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
-import { Navbar } from "@/components/layout/navbar";
+import { Dock } from "@/components/layout/dock";
 import { Footer } from "@/components/layout/footer";
+import { RevealProvider } from "@/components/reveal-provider";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const outfit = Outfit({
+  variable: "--font-main",
   subsets: ["latin"],
+  weight: ["200", "300", "400", "500"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-code",
   subsets: ["latin"],
+  weight: ["400"],
 });
 
 export const metadata: Metadata = {
@@ -22,11 +25,11 @@ export const metadata: Metadata = {
     template: "%s | Mohanad Elhag",
   },
   description:
-    "Engineering Lead & Frontend Architect. Building scalable web platforms across ecommerce, healthcare, and government sectors.",
+    "Software Engineer building scalable web platforms across ecommerce, healthcare, and government sectors.",
   openGraph: {
     title: "Mohanad Elhag",
     description:
-      "Engineering Lead & Frontend Architect. Building scalable web platforms across ecommerce, healthcare, and government sectors.",
+      "Software Engineer building scalable web platforms across ecommerce, healthcare, and government sectors.",
     url: "https://mohanadelhag.me",
     siteName: "Mohanad Elhag",
     locale: "en_US",
@@ -37,14 +40,14 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Mohanad Elhag",
     description:
-      "Engineering Lead & Frontend Architect. Building scalable web platforms across ecommerce, healthcare, and government sectors.",
+      "Software Engineer building scalable web platforms across ecommerce, healthcare, and government sectors.",
     images: ["/og-default.png"],
   },
 };
 
-// Inline script to prevent FOUC. Reads theme from localStorage before paint.
-// Content is fully static (no user input), so dangerouslySetInnerHTML is safe here.
-const themeInitScript = `(function(){var t=localStorage.getItem('theme')||'dark';document.documentElement.classList.add(t)})()`;
+// Inline script to prevent FOUC. Sets data-theme before first paint.
+// Content is a static string constant (no user input), so dangerouslySetInnerHTML is safe.
+const themeInitScript = `(function(){var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t)})()`;
 
 export default function RootLayout({
   children,
@@ -59,12 +62,14 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}
+        className={`${outfit.variable} ${jetbrainsMono.variable}`}
       >
         <ThemeProvider>
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
+          <RevealProvider>
+            <main>{children}</main>
+            <Footer />
+          </RevealProvider>
+          <Dock />
         </ThemeProvider>
       </body>
     </html>
