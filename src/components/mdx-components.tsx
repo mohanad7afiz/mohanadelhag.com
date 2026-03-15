@@ -33,7 +33,7 @@ function CopyButton({ code }: { code: string }) {
     <button
       type="button"
       onClick={handleCopy}
-      className="absolute right-3 top-3 rounded-md border border-border bg-background/50 px-2 py-1 text-xs text-muted opacity-0 transition-opacity hover:text-foreground group-hover:opacity-100 cursor-pointer"
+      className="copy-btn"
       aria-label="Copy code"
     >
       {copied ? "Copied!" : "Copy"}
@@ -51,7 +51,7 @@ function Pre({ children, ...props }: React.HTMLAttributes<HTMLPreElement>) {
       : "";
 
   return (
-    <div className="group relative">
+    <div className="code-block-wrapper">
       <CopyButton code={code} />
       <pre {...props}>{children}</pre>
     </div>

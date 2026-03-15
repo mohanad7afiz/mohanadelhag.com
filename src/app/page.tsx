@@ -19,7 +19,6 @@ export default function Home() {
       <LatestPosts posts={posts} />
       <FeaturedProjects projects={featured} />
       <AboutSnippet />
-
     </>
   );
 }

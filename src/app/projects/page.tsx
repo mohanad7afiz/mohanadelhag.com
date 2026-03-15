@@ -1,92 +1,69 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { companyProjects, personalProjects } from "@/data/projects";
-import { Container } from "@/components/ui/container";
-import { SectionHeading } from "@/components/ui/section-heading";
-import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { AnimateIn } from "@/components/ui/animate-in";
 import { Project } from "@/types";
 
 export const metadata: Metadata = {
   title: "Projects",
   description:
-    "A showcase of projects and products I've built throughout my career.",
+    "A showcase of projects and products built throughout my career.",
 };
 
-function ProjectCard({ project, index }: { project: Project; index: number }) {
+function ProjectItem({ project }: { project: Project }) {
   return (
-    <AnimateIn delay={index * 0.1}>
-      <Card className="flex h-full flex-col">
-        <h3 className="mb-2 text-lg font-semibold">{project.title}</h3>
-        <p className="mb-4 flex-1 text-sm text-muted">
-          {project.description}
-        </p>
-        <div className="mb-4 flex flex-wrap gap-1.5">
-          {project.tags.map((tag) => (
-            <Badge key={tag}>{tag}</Badge>
-          ))}
-        </div>
-        <div className="flex gap-3 text-sm">
-          {project.liveUrl && (
-            <Link
-              href={project.liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-medium text-accent hover:underline"
-            >
-              Live &rarr;
-            </Link>
-          )}
-          {project.sourceUrl && (
-            <Link
-              href={project.sourceUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-medium text-muted hover:text-foreground"
-            >
-              Source Code
-            </Link>
-          )}
-        </div>
-      </Card>
-    </AnimateIn>
+    <a
+      href={project.liveUrl || "#"}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="featured-project"
+    >
+      <div className="featured-project__header">
+        <h3 className="featured-project__title">{project.title}</h3>
+      </div>
+      <p className="featured-project__desc">{project.description}</p>
+      <div className="featured-project__tags">
+        {project.tags.map((tag) => (
+          <span key={tag} className="tag">{tag}</span>
+        ))}
+      </div>
+    </a>
   );
 }
 
 export default function ProjectsPage() {
   return (
-    <div className="py-20">
-      <Container>
-        <SectionHeading
-          title="Projects"
-          subtitle="Products and tools I have built across my career."
-        />
+    <div>
+      <section style={{ paddingTop: "var(--space-2xl)" }}>
+        <div className="container-main">
+          <h1 className="section__title" data-reveal style={{ fontSize: "var(--text-3xl)", marginBottom: "var(--space-sm)" }}>
+            Projects
+          </h1>
+          <p style={{ color: "var(--fg-muted)", fontSize: "var(--text-base)", marginBottom: "var(--space-xl)" }} data-reveal>
+            Enterprise platforms and personal experiments.
+          </p>
 
-        {/* Company Projects */}
-        <section>
-          <h3 className="mb-6 text-xl font-semibold text-muted">
-            Company Projects
-          </h3>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {companyProjects.map((project, i) => (
-              <ProjectCard key={project.title} project={project} index={i} />
+          {/* Enterprise */}
+          <div data-reveal>
+            <p className="project-section__label">Enterprise</p>
+          </div>
+          <div data-reveal-stagger>
+            {companyProjects.map((project) => (
+              <ProjectItem key={project.title} project={project} />
             ))}
           </div>
-        </section>
 
-        {/* Personal Projects */}
-        <section className="mt-16">
-          <h3 className="mb-6 text-xl font-semibold text-muted">
-            Personal Projects
-          </h3>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {personalProjects.map((project, i) => (
-              <ProjectCard key={project.title} project={project} index={i} />
+          <hr className="project-divider" />
+
+          {/* Personal */}
+          <div data-reveal>
+            <p className="project-section__label">Personal</p>
+          </div>
+          <div data-reveal-stagger>
+            {personalProjects.map((project) => (
+              <ProjectItem key={project.title} project={project} />
             ))}
           </div>
-        </section>
-      </Container>
+        </div>
+      </section>
     </div>
   );
 }
