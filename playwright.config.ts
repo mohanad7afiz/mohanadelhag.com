@@ -15,7 +15,8 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: "node .next/standalone/server.js",
+    command:
+      "cp -r .next/static .next/standalone/.next/static && cp -r public .next/standalone/public && node .next/standalone/server.js",
     port: 3000,
     reuseExistingServer: !process.env.CI,
   },
