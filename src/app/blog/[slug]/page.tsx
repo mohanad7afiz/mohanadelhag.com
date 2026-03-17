@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import rehypePrismPlus from "rehype-prism-plus";
 import { getAllPosts, getPostBySlug, getPostSlugs } from "@/lib/mdx";
 import { mdxComponents } from "@/components/mdx-components";
+import { CodeBlockCopy } from "@/components/code-block-copy";
 import { formatDate, extractHeadings } from "@/lib/utils";
 import { TableOfContents } from "./table-of-contents";
 
@@ -20,6 +22,7 @@ export function generateMetadata({
   return params.then(({ slug }) => {
     const post = getPostBySlug(slug);
     if (!post) return { title: "Not Found" };
+    const images = post.image ? [{ url: post.image }] : undefined;
     return {
       title: post.title,
       description: post.description,
@@ -29,11 +32,13 @@ export function generateMetadata({
         type: "article",
         publishedTime: post.date,
         tags: post.tags,
+        images,
       },
       twitter: {
         card: "summary_large_image",
         title: post.title,
         description: post.description,
+        images: post.image ? [post.image] : undefined,
       },
     };
   });
@@ -77,6 +82,44 @@ export default async function BlogPostPage({
           )}
         </header>
 
+        {/* Hero image */}
+        {post.image && (
+          <figure className="mb-10" data-reveal>
+            <div className="overflow-hidden rounded-lg">
+              <Image
+                src={post.image}
+                alt={post.title}
+                width={768}
+                height={432}
+                className="w-full object-cover"
+                priority
+              />
+            </div>
+            {post.imageCredit && (
+              <figcaption className="mt-2 text-center text-sm" style={{ color: "var(--fg-muted)" }}>
+                Photo by{" "}
+                <a
+                  href={post.imageCreditUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline"
+                >
+                  {post.imageCredit}
+                </a>
+                {" "}on{" "}
+                <a
+                  href="https://unsplash.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline"
+                >
+                  Unsplash
+                </a>
+              </figcaption>
+            )}
+          </figure>
+        )}
+
         {/* Content with optional TOC */}
         <div className="relative">
           {post.type === "article" && headings.length > 0 && (
@@ -85,6 +128,7 @@ export default async function BlogPostPage({
             </aside>
           )}
 
+          <CodeBlockCopy />
           <article className="prose max-w-none" data-reveal>
             <MDXRemote
               source={post.content}

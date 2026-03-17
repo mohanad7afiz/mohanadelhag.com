@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import type { GeneratedPost } from "./generate-content.js";
+import type { ImageResult } from "./fetch-image.js";
 
 const BLOG_DIR = path.resolve(
   import.meta.dirname,
@@ -31,11 +32,14 @@ function formatDate(date: Date): string {
   return date.toISOString().split("T")[0];
 }
 
-export function writeMdxFile(post: GeneratedPost): string {
+export function writeMdxFile(
+  post: GeneratedPost,
+  image?: ImageResult | null
+): string {
   const slug = getUniqueSlug(slugify(post.title));
   const filePath = path.join(BLOG_DIR, `${slug}.mdx`);
 
-  const frontmatter = [
+  const lines = [
     "---",
     `title: "${post.title.replace(/"/g, '\\"')}"`,
     `date: ${formatDate(new Date())}`,
@@ -43,9 +47,17 @@ export function writeMdxFile(post: GeneratedPost): string {
     `type: "article"`,
     `description: "${post.description.replace(/"/g, '\\"')}"`,
     `published: true`,
-    "---",
-  ].join("\n");
+  ];
 
+  if (image) {
+    lines.push(`image: "${image.localPath}"`);
+    lines.push(`imageCredit: "${image.photographerName.replace(/"/g, '\\"')}"`);
+    lines.push(`imageCreditUrl: "${image.photographerUrl}"`);
+  }
+
+  lines.push("---");
+
+  const frontmatter = lines.join("\n");
   const fileContent = `${frontmatter}\n\n${post.content}\n`;
 
   fs.writeFileSync(filePath, fileContent, "utf-8");

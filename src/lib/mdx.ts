@@ -38,6 +38,9 @@ export function getAllPosts(): Post[] {
         published: data.published !== false,
         readingTime: stats.text,
         content,
+        image: data.image,
+        imageCredit: data.imageCredit,
+        imageCreditUrl: data.imageCreditUrl,
       });
     }
   }
