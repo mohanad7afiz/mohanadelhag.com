@@ -14,7 +14,7 @@ function getMDXFiles(dir: string): string[] {
   return fs.readdirSync(dir).filter((file) => file.endsWith(".mdx"));
 }
 
-export function getAllPosts(): Post[] {
+export function getAllPosts(includeDrafts = false): Post[] {
   const posts: Post[] = [];
 
   for (const [type, dir] of Object.entries(contentDirs)) {
@@ -26,7 +26,7 @@ export function getAllPosts(): Post[] {
       const { data, content } = matter(raw);
       const stats = readingTime(content);
 
-      if (!data.published && process.env.NODE_ENV === "production") continue;
+      if (!data.published && process.env.NODE_ENV === "production" && !includeDrafts) continue;
 
       posts.push({
         slug,

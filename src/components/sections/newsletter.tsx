@@ -4,14 +4,38 @@ import { useState } from "react";
 
 export function Newsletter() {
   const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<
+    "idle" | "loading" | "success" | "duplicate" | "error"
+  >("idle");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
-    setSubmitted(true);
-    setEmail("");
-    setTimeout(() => setSubmitted(false), 4000);
+
+    setStatus("loading");
+
+    try {
+      const res = await fetch("/api/newsletter/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      if (res.ok) {
+        setStatus("success");
+        setEmail("");
+        setTimeout(() => setStatus("idle"), 4000);
+      } else if (res.status === 409) {
+        setStatus("duplicate");
+        setTimeout(() => setStatus("idle"), 4000);
+      } else {
+        setStatus("error");
+        setTimeout(() => setStatus("idle"), 4000);
+      }
+    } catch {
+      setStatus("error");
+      setTimeout(() => setStatus("idle"), 4000);
+    }
   };
 
   return (
@@ -29,13 +53,30 @@ export function Newsletter() {
             placeholder="you@example.com"
             aria-label="Email address"
             required
+            disabled={status === "loading"}
             className="newsletter-input"
           />
-          <button type="submit" className="newsletter-btn">Notify me</button>
+          <button
+            type="submit"
+            disabled={status === "loading"}
+            className="newsletter-btn"
+          >
+            {status === "loading" ? "Subscribing..." : "Notify me"}
+          </button>
         </form>
-        {submitted && (
+        {status === "success" && (
           <p style={{ marginTop: "var(--space-md)", fontSize: "var(--text-sm)", color: "var(--fg-muted)" }} role="status">
             Thanks! You will be the first to know.
+          </p>
+        )}
+        {status === "duplicate" && (
+          <p style={{ marginTop: "var(--space-md)", fontSize: "var(--text-sm)", color: "var(--fg-muted)" }} role="status">
+            You are already subscribed!
+          </p>
+        )}
+        {status === "error" && (
+          <p style={{ marginTop: "var(--space-md)", fontSize: "var(--text-sm)", color: "#f97583" }} role="alert">
+            Something went wrong. Please try again.
           </p>
         )}
       </div>

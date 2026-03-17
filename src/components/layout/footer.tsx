@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const socialLinks = [
   { label: "GitHub", href: "https://github.com/mohanad7afiz" },
@@ -7,6 +10,10 @@ const socialLinks = [
 ];
 
 export function Footer() {
+  const pathname = usePathname();
+
+  if (pathname.startsWith("/admin")) return null;
+
   return (
     <footer className="site-footer">
       <div className="container-main">
