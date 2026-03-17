@@ -37,11 +37,16 @@ jobs:
         working-directory: scripts/blog-generator
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
           TOPIC_HINT: ${{ inputs.topic_hint || '' }}
+          SITE_URL: "https://mohanadelhag.dev"
         run: npx tsx index.ts
 
-      - name: Stage new posts
-        run: git add src/content/blog/*.mdx
+      - name: Stage new posts, images, and LinkedIn output
+        run: |
+          git add src/content/blog/*.mdx
+          git add public/blog/*.jpg || true
+          git add scripts/blog-generator/output/linkedin/*.md || true
 
       - name: Check for changes
         id: check
@@ -58,7 +63,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git commit -m "$(cat <<'EOF'
-          Add auto-generated blog post
+          Add auto-generated blog post and LinkedIn summary
           EOF
           )"
           git push

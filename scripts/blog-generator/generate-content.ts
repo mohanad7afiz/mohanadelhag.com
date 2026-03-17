@@ -5,6 +5,7 @@ export interface GeneratedPost {
   title: string;
   description: string;
   tags: string[];
+  imageQuery: string;
   content: string;
 }
 
@@ -26,12 +27,14 @@ function validatePost(post: GeneratedPost): boolean {
 
 export async function generateContent(
   topic: string,
-  existingPosts: { title: string; description: string }[]
+  existingPosts: { title: string; description: string }[],
+  context?: string,
+  keyword?: string
 ): Promise<GeneratedPost> {
   const client = new Anthropic();
 
   const systemPrompt = buildSystemPrompt();
-  const userPrompt = buildUserPrompt(topic, existingPosts);
+  const userPrompt = buildUserPrompt(topic, existingPosts, context, keyword);
 
   let lastError: Error | null = null;
 

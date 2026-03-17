@@ -8,6 +8,9 @@ export interface Post {
   published: boolean;
   readingTime: string;
   content: string;
+  image?: string;
+  imageCredit?: string;
+  imageCreditUrl?: string;
 }
 
 export interface Project {
