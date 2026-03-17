@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Dock } from "@/components/layout/dock";
 import { Footer } from "@/components/layout/footer";
 import { RevealProvider } from "@/components/reveal-provider";
+import { AnalyticsTracker } from "@/components/analytics-tracker";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -70,6 +71,7 @@ export default function RootLayout({
             <Footer />
           </RevealProvider>
           <Dock />
+          <AnalyticsTracker />
         </ThemeProvider>
       </body>
     </html>
