@@ -1,0 +1,83 @@
+---
+title: "I Gave Claude Full Control of My Mac. Here Is What Happened."
+date: 2026-03-27
+tags: [ai, anthropic, automation, claude]
+type: article
+description: "Anthropic just shipped Computer Use, letting Claude take over your entire Mac autonomously. I tested it, compared it to OpenClaw, and honestly, things got weird fast."
+published: true
+---
+
+So Anthropic just dropped Computer Use this week and I have been playing with it nonstop. If you missed it, it basically lets Claude take full autonomous control of your Mac. Open apps, write emails, attend meetings, push code. All from a single prompt.
+
+The wildest part? You can trigger it from your phone. You do not even need to be at your desk.
+
+As someone who spends most of their day inside a terminal and a browser, this feels like the first AI feature that actually changes my workflow instead of just adding another chat window.
+
+## OK But What Actually Is It?
+
+Think of it like giving Claude your mouse and keyboard. It sees your screen, understands context, and takes actions. Not through some API or plugin system, but by literally navigating your desktop like a human would.
+
+Right now it only runs on macOS. It takes a permission first approach, asking before accessing new apps and only touching folders you explicitly allow. So it is not just YOLO clicking around your file system, which is nice.
+
+## The AI Agent War Is Heating Up
+
+If you have been following the space, you know Dario Amodei (Anthropic's CEO) has been on a press tour basically saying that **50% of entry level knowledge workers will be displaced in 1 to 5 years**. Bold claim. But then you look at what these tools can actually do now and it starts feeling less like hype.
+
+Last month OpenAI acquired **OpenClaw**, that open source AI assistant that was originally called Clawbot before Anthropic hit them with a cease and desist. Now it is pretty clear why Anthropic was so aggressive about it. They had Computer Use in the pipeline.
+
+## Computer Use vs OpenClaw
+
+This is basically **Android vs iOS all over again**.
+
+| | **OpenClaw** | **Computer Use** |
+|---|---|---|
+| **Cost** | Free | Paid |
+| **Source** | Open source | Closed source |
+| **Runtime** | Local, any OS | macOS only |
+| **Models** | Any model | Claude only |
+
+OpenClaw gives you more freedom but also more risk. Palo Alto Networks flagged it as a "dangerous combination of access to private data, exposure to untrusted content, and the ability to communicate externally while retaining memory." One of OpenClaw's own maintainers even said that if you cannot run a command line, the project is probably too dangerous for you.
+
+Computer Use is the opposite trade off. Less flexibility, but it just works. No setup, no config files, no Docker containers. You install it and go.
+
+As an engineer who has set up way too many dev environments in my life, I can appreciate that.
+
+## What I Actually Tested
+
+Here is where it gets fun. I threw a bunch of real world tasks at it to see how far it could go.
+
+### Writing and Sending Emails
+
+I prompted it to draft cover letters for a few job postings I found interesting. It pulled context from the listings, personalized each one, and sent them through my email client. The quality was honestly better than what I would have written at 11 PM on a Tuesday.
+
+### Joining Meetings
+
+This one blew my mind. I synced it to my calendar and it automatically joined a Zoom call, listened to the discussion, and gave me a summary afterward. It can even participate using a local voice model. I am not saying you should do this. But you could.
+
+### Writing and Shipping Code
+
+I gave it a feature spec and it wrote the implementation, ran the tests, and opened a pull request. The code was decent. Not perfect, but the kind of first pass that saves you an hour of scaffolding. It even scheduled the PR for late Friday afternoon, which is either brilliant or terrifying depending on your perspective.
+
+### Managing Finances
+
+It logged into my bank, checked deposits, and set up a transfer. Fully automated. I watched the whole thing happen in real time and it felt like watching a ghost use my computer.
+
+## My Take as a Developer
+
+Look, I have been building frontends for 9+ years. I have seen every "this changes everything" tool come and go. Most of them do not.
+
+But Computer Use feels different. Not because the AI is smarter (though it is), but because the interface changed. Instead of me translating my intent into prompts and copy pasting results, Claude just does the thing directly on my machine.
+
+That said, there are real concerns here:
+
+- **Security** is the obvious one. An agent with access to your browser, email, and terminal is a massive attack surface
+- **Trust** is earned, not given. I would not let it touch production credentials or sensitive repos yet
+- **It is still early.** I hit edge cases where it got confused by custom UI elements or non standard app layouts
+
+## Where This Is Going
+
+The line between tool and agent is disappearing. We went from "AI that writes code" to "AI that ships code" in about 18 months. Computer Use is not the end state, it is the starting line.
+
+For developers, the play is obvious: learn how these tools work, understand their limitations, and figure out where they fit in your workflow. The engineers who treat AI agents as a force multiplier will run circles around the ones who ignore them.
+
+Whether that excites you or terrifies you probably depends on how much of your job is stuff a computer could do anyway.
