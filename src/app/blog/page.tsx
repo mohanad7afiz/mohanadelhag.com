@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { getAllPosts } from "@/lib/mdx";
 import { BlogListClient } from "@/app/blog/blog-list-client";
 
+export const revalidate = 300;
+
 export const metadata: Metadata = {
   title: "Blog",
   description:
