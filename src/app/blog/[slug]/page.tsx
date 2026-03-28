@@ -10,9 +10,6 @@ import { CodeBlockCopy } from "@/components/code-block-copy";
 import { formatDate, extractHeadings } from "@/lib/utils";
 import { TableOfContents } from "./table-of-contents";
 
-export const dynamicParams = true;
-export const revalidate = 300;
-
 export function generateStaticParams() {
   return getPostSlugs().map((slug) => ({ slug }));
 }
